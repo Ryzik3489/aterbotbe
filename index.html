@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АНАРХИЯ 1.12.2 | БЕЗ ПРАВИЛ</title>
+    <title>ANARCHY 1.12.2 | ДЮП И ЧИТЫ</title>
     <style>
         :root {
             --danger: #ff4444;
@@ -11,14 +11,16 @@
             --bg: #0a0a0a;
             --card: #151515;
         }
+
         body {
             background-color: var(--bg);
             color: #eee;
-            font-family: 'Courier New', Courier, monospace; /* Стиль хакера/анархии */
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
             padding: 10px;
             text-align: center;
         }
+
         .container {
             max-width: 800px;
             margin: auto;
@@ -28,9 +30,9 @@
             border: 2px solid #333;
             box-shadow: 0 0 30px rgba(255,0,0,0.2);
         }
+
         h1 { color: var(--danger); font-size: 3em; text-shadow: 0 0 10px #ff0000; margin: 10px 0; }
-        
-        /* Теги функций */
+
         .tags-grid {
             display: flex;
             flex-wrap: wrap;
@@ -38,52 +40,72 @@
             gap: 10px;
             margin: 20px 0;
         }
+
         .tag {
             background: #222;
             border: 1px solid #444;
-            padding: 5px 12px;
+            padding: 8px 15px;
             border-radius: 3px;
             font-size: 14px;
             color: #aaa;
-            transition: 0.3s;
         }
-        .tag:hover { border-color: var(--danger); color: white; box-shadow: 0 0 10px var(--danger); }
-        .tag.hot { border-color: var(--danger); color: var(--danger); font-weight: bold; }
+
+        /* Статичное выделение без анимации */
+        .tag.hot {
+            border: 2px solid var(--accent) !important;
+            color: #fff !important;
+            background: #8b0000 !important;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
 
         .ip-box {
             background: #000;
             padding: 25px;
-            font-size: 26px;
+            font-size: 24px;
             border: 3px double var(--danger);
             margin: 25px 0;
             cursor: pointer;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
+        .ip-box:hover { background: #111; transform: scale(1.01); }
+
         .online-info { color: var(--danger); font-weight: bold; margin-bottom: 20px; font-size: 1.2em; }
 
-        .warn-box {
-            background: rgba(255, 0, 0, 0.1);
-            border-left: 5px solid var(--danger);
-            padding: 15px;
-            text-align: left;
-            margin: 20px 0;
-        }
-        
         .vote-section {
             margin-top: 40px;
             border-top: 1px solid #333;
             padding-top: 20px;
+            background: rgba(255,0,0,0.05);
+            border-radius: 10px;
         }
-        .mr-vote-server { filter: grayscale(1) invert(1); transition: 0.5s; }
-        .mr-vote-server:hover { filter: none; transform: scale(1.1); }
+
+        .vote-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .vote-item { transition: 0.3s; }
+        .vote-item:hover { transform: translateY(-3px); }
+
+        .monitor-btn img {
+            border-radius: 5px;
+            border: 1px solid #444;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>ANARCHY SERVER</h1>
+    <h1>ANARCHY</h1>
+    
     <div class="online-info">
-        [ ОНЛАЙН: <span id="player-count">...</span> ]
+        [ СТАТУС: <span id="server-status">ПРОВЕРКА...</span> | ИГРОКОВ: <span id="player-count">0</span> ]
     </div>
 
     <div class="tags-grid">
@@ -96,44 +118,65 @@
         <div class="tag">PVP 24/7</div>
         <div class="tag">БЕЗ ДОНАТА</div>
         <div class="tag">ПИРАТКА</div>
-        <div class="tag">РУССКИЙ СЕРВЕР</div>
+        <div class="tag">РУССКИЕ</div>
     </div>
 
     <div class="ip-box" onclick="copyIP()">
         <span id="ip">window-trespass.gl.joinmc.link</span>
-        <div style="font-size: 12px; color: #555; margin-top: 10px;">КЛИКНИ ЧТОБЫ СКОПИРОВАТЬ</div>
-    </div>
-
-    <div class="warn-box">
-        <b>ВНИМАНИЕ:</b> Здесь нет правил. Админ не помогает. Гриферство поощряется. Выживай как хочешь или умри.
+        <div style="font-size: 12px; color: #555; margin-top: 10px;">КЛИКНИ, ЧТОБЫ СКОПИРОВАТЬ IP</div>
     </div>
 
     <div class="vote-section">
-        <p>ПОДНЯТЬ СЕРВЕР В ТОПЕ:</p>
-        <a href="https://minecraftrating.ru/" class="mr-vote-server" data-server-id="387813">
-            <span id="mr-vote-title"><img src="//minecraftrating.ru/templates/theme/images/logo.png" alt="" /></span>
-            <span id="mr-vote-counter"><u></u><i></i></span>
-        </a>
-        <script type="text/javascript" src="//minecraftrating.ru/widgets_api/vote/vote_widget.js?v=400"></script>
+        <p style="font-weight: bold; color: var(--danger);">ПОДНЯТЬ СЕРВЕР В ТОПАХ:</p>
+        <div class="vote-container">
+            
+            <div class="vote-item">
+                <a href="https://minecraftrating.ru/" class="mr-vote-server" data-server-id="387813">
+                    <span id="mr-vote-title"><img src="//minecraftrating.ru/templates/theme/images/logo.png" alt="MinecraftRating" /></span>
+                    <span id="mr-vote-counter"><u></u><i></i></span>
+                </a>
+                <script type="text/javascript" src="//minecraftrating.ru/widgets_api/vote/vote_widget.js?v=400"></script>
+            </div>
+
+            <div class="vote-item">
+                <a href="https://mc-monitor.org/server/20127" target="_blank" class="monitor-btn">
+                    <img src="https://mc-monitor.org/img/new-buttons/bagic-v4_06.jpg" alt="Сервера Майнкрафт на mc-monitor.org">
+                </a>
+            </div>
+
+        </div>
     </div>
 
-    <p style="color: #444; font-size: 10px; margin-top: 50px;">HOSTED ON ANDROID DEVICE | NO LOGS | NO LIMITS</p>
+    <p style="color: #333; font-size: 10px; margin-top: 40px;">HOSTED VIA TERMUX | VERSION 1.12.2</p>
 </div>
 
 <script>
     function copyIP() {
         const ipText = document.getElementById('ip').innerText;
         navigator.clipboard.writeText(ipText);
-        alert("IP СКОПИРОВАН. УДАЧИ В АДУ.");
+        alert("IP СКОПИРОВАН! ЗАХОДИ И РАЗНОСИ.");
     }
 
     async function updateStatus() {
+        const ip = "window-trespass.gl.joinmc.link";
         try {
-            const response = await fetch(`https://api.mcstatus.io/v2/status/java/window-trespass.gl.joinmc.link`);
+            const response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
             const data = await response.json();
-            document.getElementById('player-count').innerText = data.online ? data.players.online : "OFFLINE";
-        } catch (e) { document.getElementById('player-count').innerText = "ERROR"; }
+            
+            if (data.online) {
+                document.getElementById('server-status').innerText = "ONLINE";
+                document.getElementById('server-status').style.color = "#55ff55";
+                document.getElementById('player-count').innerText = data.players.online;
+            } else {
+                document.getElementById('server-status').innerText = "OFFLINE";
+                document.getElementById('server-status').style.color = "#ff4444";
+                document.getElementById('player-count').innerText = "0";
+            }
+        } catch (e) {
+            document.getElementById('server-status').innerText = "ERROR";
+        }
     }
+
     updateStatus();
     setInterval(updateStatus, 30000);
 </script>
