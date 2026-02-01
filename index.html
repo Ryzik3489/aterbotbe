@@ -22,7 +22,7 @@
             border: 4px solid #555;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        h1 { color: #ffaa00; text-shadow: 2px 2px #000; }
+        h1 { color: #ffaa00; text-shadow: 2px 2px #000; margin-bottom: 5px; }
         .ip-box {
             background: #000;
             padding: 15px;
@@ -33,29 +33,27 @@
             transition: 0.3s;
         }
         .ip-box:hover { background: #222; border-style: solid; }
-        .btn {
+        .status { color: #55ff55; font-weight: bold; margin-bottom: 20px; }
+        
+        /* Стили для виджета голосования */
+        .vote-section {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .mr-vote-server {
             display: inline-block;
-            padding: 15px 30px;
-            background: #3c8527;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 5px solid #285b1a;
-            margin-top: 20px;
-            border-radius: 5px;
+            transform: scale(1.2); /* Немного увеличим кнопку для удобства */
+            margin: 10px 0;
         }
-        .btn:active {
-            border-bottom: 2px solid #285b1a;
-            transform: translateY(3px);
-        }
-        .status { color: #55ff55; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>ДОБРО ПОЖАЛОВАТЬ!</h1>
-    <p>Лучший сервер выживания на версии <b>1.12.2</b></p>
+    <p>Выживание на версии <b>1.12.2</b></p>
     
     <div class="ip-box" onclick="copyIP()">
         IP: <span id="ip">window-trespass.gl.joinmc.link</span>
@@ -64,25 +62,32 @@
 
     <div class="status">● СЕРВЕР ОНЛАЙН</div>
 
-    <hr style="border: 1px solid #444; margin: 20px 0;">
+    <div class="features" style="text-align: left; display: inline-block; margin: 10px 0;">
+        <li>🌲 Классический мир <b>Без Вайпов</b></li>
+        <li>🛡️ Надежная защита регионов</li>
+        <li>📱 Работает 24/7 на смартфоне</li>
+    </div>
 
-    <h3>ОСОБЕННОСТИ:</h3>
-    <ul style="text-align: left; display: inline-block;">
-        <li>🌲 Классическое выживание</li>
-        <li>💰 Экономика и работы</li>
-        <li>🛡️ Надежный регион</li>
-        <li>📱 Сервер работает 24/7 на смартфоне!</li>
-    </ul>
+    <hr style="border: 1px solid #444; margin: 25px 0;">
 
-    <br>
-    <a href="https://discord.gg/твой_код" class="btn">ЗАЙТИ В DISCORD</a>
+    <div class="vote-section">
+        <h3>Поддержи проект голосом:</h3>
+        <a href="https://minecraftrating.ru/" class="mr-vote-server" data-server-id="387813">
+            <span id="mr-vote-title">
+                <img src="//minecraftrating.ru/templates/theme/images/logo.png" alt="MinecraftRating" />
+            </span>
+            <span id="mr-vote-counter"><u></u><i></i></span>
+        </a>
+        <script type="text/javascript" src="//minecraftrating.ru/widgets_api/vote/vote_widget.js?v=400"></script>
+    </div>
+
 </div>
 
 <script>
     function copyIP() {
         const ipText = document.getElementById('ip').innerText;
         navigator.clipboard.writeText(ipText);
-        alert("IP скопирован: " + ipText);
+        alert("IP скопирован! Вставляй в Minecraft и заходи.");
     }
 </script>
 
