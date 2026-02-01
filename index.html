@@ -3,92 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Сервер 1.12.2</title>
+    <title>Survival 1.12.2 | Официальный сайт</title>
     <style>
+        :root {
+            --primary: #ffaa00;
+            --success: #55ff55;
+            --bg: #1a1a1a;
+            --card: #2d2d2d;
+        }
         body {
-            background-color: #1a1a1a;
+            background-color: var(--bg);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: auto;
-            background: #2d2d2d;
+            background: var(--card);
             padding: 30px;
-            border-radius: 15px;
-            border: 4px solid #555;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            border: 4px solid #444;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.7);
         }
-        h1 { color: #ffaa00; text-shadow: 2px 2px #000; margin-bottom: 5px; }
+        h1 { color: var(--primary); text-shadow: 3px 3px #000; margin-bottom: 5px; text-transform: uppercase; }
+        
+        /* Стили онлайна */
+        .online-status {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 15px 0;
+            border: 1px solid var(--success);
+        }
+        .dot { height: 12px; width: 12px; background-color: var(--success); border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--success); }
+
         .ip-box {
             background: #000;
-            padding: 15px;
-            font-size: 20px;
-            border: 2px dashed #ffaa00;
+            padding: 20px;
+            font-size: 22px;
+            border: 2px solid var(--primary);
             margin: 20px 0;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .ip-box:hover { background: #222; border-style: solid; }
-        .status { color: #55ff55; font-weight: bold; margin-bottom: 20px; }
-        
-        /* Стили для виджета голосования */
-        .vote-section {
-            margin-top: 25px;
-            padding: 15px;
-            background: rgba(0,0,0,0.2);
             border-radius: 10px;
+            transition: all 0.3s;
+            position: relative;
         }
-        .mr-vote-server {
-            display: inline-block;
-            transform: scale(1.2); /* Немного увеличим кнопку для удобства */
+        .ip-box:hover { transform: scale(1.02); background: #111; }
+        
+        /* Функции (Правила и Команды) */
+        details {
+            background: #3d3d3d;
+            padding: 15px;
             margin: 10px 0;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
         }
+        summary { font-weight: bold; color: var(--primary); outline: none; }
+        
+        .command-list { background: #1a1a1a; padding: 10px; border-radius: 5px; font-family: monospace; color: #ccc; }
+        .command-item { border-bottom: 1px solid #333; padding: 5px 0; }
+        .command-item b { color: var(--success); }
+
+        .vote-section { margin-top: 30px; padding: 20px; background: rgba(255,170,0,0.1); border-radius: 15px; border: 1px solid var(--primary); }
+        .mr-vote-server { transform: scale(1.1); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>ДОБРО ПОЖАЛОВАТЬ!</h1>
-    <p>Выживание на версии <b>1.12.2</b></p>
-    
+    <h1>SERVER NAME</h1>
+    <p>Ламповое выживание на <b>1.12.2</b> без вайпов</p>
+
+    <div class="online-status">
+        <span class="dot"></span>
+        Статус: <span id="server-status">Загрузка...</span> | Игроков: <b id="player-count">0</b>
+    </div>
+
     <div class="ip-box" onclick="copyIP()">
-        IP: <span id="ip">window-trespass.gl.joinmc.link</span>
-    </div>
-    <p><small>(Нажми на адрес, чтобы скопировать)</small></p>
-
-    <div class="status">● СЕРВЕР ОНЛАЙН</div>
-
-    <div class="features" style="text-align: left; display: inline-block; margin: 10px 0;">
-        <li>🌲 Классический мир <b>Без Вайпов</b></li>
-        <li>🛡️ Надежная защита регионов</li>
-        <li>📱 Работает 24/7 на смартфоне</li>
+        <span id="ip">window-trespass.gl.joinmc.link</span>
+        <div style="font-size: 12px; color: #888; margin-top: 5px;">Нажми, чтобы скопировать IP</div>
     </div>
 
-    <hr style="border: 1px solid #444; margin: 25px 0;">
+    <hr style="border: 1px solid #444; margin: 30px 0;">
+
+    <h3>📜 ИНФОРМАЦИЯ И ПРАВИЛА</h3>
+    
+    <details>
+        <summary>🛡️ Основные правила</summary>
+        <p>1. Не читерить (бан навсегда).<br>2. Не гриферить чужие постройки.<br>3. Не оскорблять игроков в чате.</p>
+    </details>
+
+    <details>
+        <summary>💬 Полезные команды</summary>
+        <div class="command-list">
+            <div class="command-item"><b>/spawn</b> - Вернуться на спавн</div>
+            <div class="command-item"><b>/sethome</b> - Установить точку дома</div>
+            <div class="command-item"><b>/home</b> - Телепорт домой</div>
+            <div class="command-item"><b>/tpa [ник]</b> - Запрос на телепорт к игроку</div>
+        </div>
+    </details>
+
+    <details>
+        <summary>💎 Как получить донат?</summary>
+        <p>Голосуй за сервер каждый день и получай бонусы в игре! Мы ценим каждого активного игрока.</p>
+    </details>
 
     <div class="vote-section">
-        <h3>Поддержи проект голосом:</h3>
+        <h3>ПОДДЕРЖАТЬ СЕРВЕР:</h3>
         <a href="https://minecraftrating.ru/" class="mr-vote-server" data-server-id="387813">
-            <span id="mr-vote-title">
-                <img src="//minecraftrating.ru/templates/theme/images/logo.png" alt="MinecraftRating" />
-            </span>
+            <span id="mr-vote-title"><img src="//minecraftrating.ru/templates/theme/images/logo.png" alt="" /></span>
             <span id="mr-vote-counter"><u></u><i></i></span>
         </a>
         <script type="text/javascript" src="//minecraftrating.ru/widgets_api/vote/vote_widget.js?v=400"></script>
     </div>
 
+    <p style="margin-top: 40px; color: #666; font-size: 12px;">© 2026 Твой Сервер. Работает на Android через Termux.</p>
 </div>
 
 <script>
+    // Функция копирования IP
     function copyIP() {
         const ipText = document.getElementById('ip').innerText;
         navigator.clipboard.writeText(ipText);
-        alert("IP скопирован! Вставляй в Minecraft и заходи.");
+        alert("IP скопирован! Вставляй в Minecraft.");
     }
+
+    // Функция получения онлайна
+    async function updateStatus() {
+        const ip = "window-trespass.gl.joinmc.link";
+        try {
+            const response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
+            const data = await response.json();
+            
+            if (data.online) {
+                document.getElementById('server-status').innerText = "ОНЛАЙН";
+                document.getElementById('server-status').style.color = "#55ff55";
+                document.getElementById('player-count').innerText = data.players.online;
+            } else {
+                document.getElementById('server-status').innerText = "ВЫКЛЮЧЕН";
+                document.getElementById('server-status').style.color = "#ff5555";
+                document.getElementById('player-count').innerText = "0";
+            }
+        } catch (error) {
+            console.log("Ошибка получения данных");
+        }
+    }
+
+    // Обновляем статус каждые 30 секунд
+    updateStatus();
+    setInterval(updateStatus, 30000);
 </script>
 
 </body>
