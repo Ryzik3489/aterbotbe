@@ -23,7 +23,7 @@
 
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 20px auto;
             background: var(--card);
             padding: 25px;
             border-radius: 5px;
@@ -32,6 +32,16 @@
         }
 
         h1 { color: var(--danger); font-size: 3em; text-shadow: 0 0 10px #ff0000; margin: 10px 0; }
+
+        .online-info { 
+            color: var(--danger); 
+            font-weight: bold; 
+            margin-bottom: 20px; 
+            font-size: 1.2em;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
 
         .tags-grid {
             display: flex;
@@ -50,7 +60,7 @@
             color: #aaa;
         }
 
-        /* Статичное выделение без анимации */
+        /* Выделенные кнопки без пульсации */
         .tag.hot {
             border: 2px solid var(--accent) !important;
             color: #fff !important;
@@ -71,8 +81,6 @@
         }
         .ip-box:hover { background: #111; transform: scale(1.01); }
 
-        .online-info { color: var(--danger); font-weight: bold; margin-bottom: 20px; font-size: 1.2em; }
-
         .vote-section {
             margin-top: 40px;
             border-top: 1px solid #333;
@@ -88,6 +96,7 @@
             gap: 25px;
             align-items: center;
             margin-top: 15px;
+            padding-bottom: 20px;
         }
 
         .vote-item { transition: 0.3s; }
@@ -96,6 +105,7 @@
         .monitor-btn img {
             border-radius: 5px;
             border: 1px solid #444;
+            display: block;
         }
     </style>
 </head>
@@ -105,12 +115,12 @@
     <h1>ANARCHY</h1>
     
     <div class="online-info">
-        [ СТАТУС: <span id="server-status">ПРОВЕРКА...</span> | ИГРОКОВ: <span id="player-count">0</span> ]
+        [ СТАТУС: <span id="server-status">ПРОВЕРКА...</span> | ОНЛАЙН: <span id="player-count">0</span> ]
     </div>
 
     <div class="tags-grid">
-        <div class="tag">ДЮП РАЗРЕШЕН</div>
-        <div class="tag">ЧИТЫ РАЗРЕШЕНЫ</div>
+        <div class="tag hot">ДЮП РАЗРЕШЕН</div>
+        <div class="tag hot">ЧИТЫ РАЗРЕШЕНЫ</div>
         <div class="tag">БЕЗ ПРИВАТА</div>
         <div class="tag">БЕЗ АНТИЧИТА</div>
         <div class="tag">БЕЗ РЕГИСТРАЦИИ</div>
@@ -127,7 +137,7 @@
     </div>
 
     <div class="vote-section">
-        <p style="font-weight: bold; color: var(--danger);">ПОДНЯТЬ СЕРВЕР В ТОПАХ:</p>
+        <p style="font-weight: bold; color: var(--danger); text-transform: uppercase;">Голосуй и поднимай сервер:</p>
         <div class="vote-container">
             
             <div class="vote-item">
@@ -138,22 +148,29 @@
                 <script type="text/javascript" src="//minecraftrating.ru/widgets_api/vote/vote_widget.js?v=400"></script>
             </div>
 
-           <a href="https://mc-monitor.org/server/20127" target="_blank"><img src="https://mc-monitor.org/img/new-buttons/bagic-v4_06.jpg" alt="Сервера Майнкрафт на mc-monitor.org"></a>
+            <div class="vote-item">
+                <a href="https://mc-monitor.org/server/20127" target="_blank" class="monitor-btn">
+                    <img src="https://mc-monitor.org/img/new-buttons/bagic-v4_06.jpg" alt="Сервера Майнкрафт на mc-monitor.org">
+                </a>
             </div>
 
         </div>
     </div>
 
-    <p style="color: #333; font-size: 10px; margin-top: 40px;">HOSTED VIA TERMUX | VERSION 1.12.2</p>
+    <p style="color: #333; font-size: 11px; margin-top: 40px; letter-spacing: 1px;">
+        © 2026 ANARCHY PROJECT | HOSTED ON ANDROID
+    </p>
 </div>
 
 <script>
+    // Копирование IP
     function copyIP() {
         const ipText = document.getElementById('ip').innerText;
         navigator.clipboard.writeText(ipText);
-        alert("IP СКОПИРОВАН! ЗАХОДИ И РАЗНОСИ.");
+        alert("IP СКОПИРОВАН! ЖДЕМ ТЕБЯ.");
     }
 
+    // Живой статус сервера
     async function updateStatus() {
         const ip = "window-trespass.gl.joinmc.link";
         try {
@@ -174,6 +191,7 @@
         }
     }
 
+    // Проверка каждые 30 секунд
     updateStatus();
     setInterval(updateStatus, 30000);
 </script>
