@@ -3,118 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survival 1.12.2 | Официальный сайт</title>
+    <title>АНАРХИЯ 1.12.2 | БЕЗ ПРАВИЛ</title>
     <style>
         :root {
-            --primary: #ffaa00;
-            --success: #55ff55;
-            --bg: #1a1a1a;
-            --card: #2d2d2d;
+            --danger: #ff4444;
+            --accent: #ff0000;
+            --bg: #0a0a0a;
+            --card: #151515;
         }
         body {
             background-color: var(--bg);
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
+            color: #eee;
+            font-family: 'Courier New', Courier, monospace; /* Стиль хакера/анархии */
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 10px;
+            text-align: center;
         }
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: auto;
             background: var(--card);
-            padding: 30px;
-            border-radius: 20px;
-            border: 4px solid #444;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+            padding: 25px;
+            border-radius: 5px;
+            border: 2px solid #333;
+            box-shadow: 0 0 30px rgba(255,0,0,0.2);
         }
-        h1 { color: var(--primary); text-shadow: 3px 3px #000; margin-bottom: 5px; text-transform: uppercase; }
+        h1 { color: var(--danger); font-size: 3em; text-shadow: 0 0 10px #ff0000; margin: 10px 0; }
         
-        /* Стили онлайна */
-        .online-status {
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 50px;
-            display: inline-block;
-            margin: 15px 0;
-            border: 1px solid var(--success);
+        /* Теги функций */
+        .tags-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
         }
-        .dot { height: 12px; width: 12px; background-color: var(--success); border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--success); }
+        .tag {
+            background: #222;
+            border: 1px solid #444;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: #aaa;
+            transition: 0.3s;
+        }
+        .tag:hover { border-color: var(--danger); color: white; box-shadow: 0 0 10px var(--danger); }
+        .tag.hot { border-color: var(--danger); color: var(--danger); font-weight: bold; }
 
         .ip-box {
             background: #000;
-            padding: 20px;
-            font-size: 22px;
-            border: 2px solid var(--primary);
-            margin: 20px 0;
+            padding: 25px;
+            font-size: 26px;
+            border: 3px double var(--danger);
+            margin: 25px 0;
             cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s;
-            position: relative;
+            letter-spacing: 2px;
         }
-        .ip-box:hover { transform: scale(1.02); background: #111; }
-        
-        /* Функции (Правила и Команды) */
-        details {
-            background: #3d3d3d;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            text-align: left;
-            cursor: pointer;
-        }
-        summary { font-weight: bold; color: var(--primary); outline: none; }
-        
-        .command-list { background: #1a1a1a; padding: 10px; border-radius: 5px; font-family: monospace; color: #ccc; }
-        .command-item { border-bottom: 1px solid #333; padding: 5px 0; }
-        .command-item b { color: var(--success); }
+        .online-info { color: var(--danger); font-weight: bold; margin-bottom: 20px; font-size: 1.2em; }
 
-        .vote-section { margin-top: 30px; padding: 20px; background: rgba(255,170,0,0.1); border-radius: 15px; border: 1px solid var(--primary); }
-        .mr-vote-server { transform: scale(1.1); }
+        .warn-box {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 5px solid var(--danger);
+            padding: 15px;
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .vote-section {
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+        .mr-vote-server { filter: grayscale(1) invert(1); transition: 0.5s; }
+        .mr-vote-server:hover { filter: none; transform: scale(1.1); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>NonArth</h1>
-    <p>Ламповое выживание на <b>1.12.2</b> без вайпов</p>
+    <h1>ANARCHY SERVER</h1>
+    <div class="online-info">
+        [ ОНЛАЙН: <span id="player-count">...</span> ]
+    </div>
 
-    <div class="online-status">
-        <span class="dot"></span>
-        Статус: <span id="server-status">Загрузка...</span> | Игроков: <b id="player-count">0</b>
+    <div class="tags-grid">
+        <div class="tag hot">ДЮП РАЗРЕШЕН</div>
+        <div class="tag hot">ЧИТЫ РАЗРЕШЕНЫ</div>
+        <div class="tag">БЕЗ ПРИВАТА</div>
+        <div class="tag">БЕЗ АНТИЧИТА</div>
+        <div class="tag">БЕЗ РЕГИСТРАЦИИ</div>
+        <div class="tag">БЕЗ ВАЙПОВ</div>
+        <div class="tag">PVP 24/7</div>
+        <div class="tag">БЕЗ ДОНАТА</div>
+        <div class="tag">ПИРАТКА</div>
+        <div class="tag">РУССКИЙ СЕРВЕР</div>
     </div>
 
     <div class="ip-box" onclick="copyIP()">
         <span id="ip">window-trespass.gl.joinmc.link</span>
-        <div style="font-size: 12px; color: #888; margin-top: 5px;">Нажми, чтобы скопировать IP</div>
+        <div style="font-size: 12px; color: #555; margin-top: 10px;">КЛИКНИ ЧТОБЫ СКОПИРОВАТЬ</div>
     </div>
 
-    <hr style="border: 1px solid #444; margin: 30px 0;">
-
-    <h3>📜 ИНФОРМАЦИЯ И ПРАВИЛА</h3>
-    
-    <details>
-        <summary>🛡️ Основные правила</summary>
-        <p>1. Не читерить (бан навсегда).<br>2. Не гриферить чужие постройки.<br>3. Не оскорблять игроков в чате.</p>
-    </details>
-
-    <details>
-        <summary>💬 Полезные команды</summary>
-        <div class="command-list">
-            <div class="command-item"><b>/spawn</b> - Вернуться на спавн</div>
-            <div class="command-item"><b>/sethome</b> - Установить точку дома</div>
-            <div class="command-item"><b>/home</b> - Телепорт домой</div>
-            <div class="command-item"><b>/tpa [ник]</b> - Запрос на телепорт к игроку</div>
-        </div>
-    </details>
-
-    <details>
-        <summary>💎 Как получить донат?</summary>
-        <p>Голосуй за сервер каждый день и получай бонусы в игре! Мы ценим каждого активного игрока.</p>
-    </details>
+    <div class="warn-box">
+        <b>ВНИМАНИЕ:</b> Здесь нет правил. Админ не помогает. Гриферство поощряется. Выживай как хочешь или умри.
+    </div>
 
     <div class="vote-section">
-        <h3>ПОДДЕРЖАТЬ СЕРВЕР:</h3>
+        <p>ПОДНЯТЬ СЕРВЕР В ТОПЕ:</p>
         <a href="https://minecraftrating.ru/" class="mr-vote-server" data-server-id="387813">
             <span id="mr-vote-title"><img src="//minecraftrating.ru/templates/theme/images/logo.png" alt="" /></span>
             <span id="mr-vote-counter"><u></u><i></i></span>
@@ -122,39 +117,23 @@
         <script type="text/javascript" src="//minecraftrating.ru/widgets_api/vote/vote_widget.js?v=400"></script>
     </div>
 
-    <p style="margin-top: 40px; color: #666; font-size: 12px;">© 2026 Твой Сервер. Работает на Android через Termux.</p>
+    <p style="color: #444; font-size: 10px; margin-top: 50px;">HOSTED ON ANDROID DEVICE | NO LOGS | NO LIMITS</p>
 </div>
 
 <script>
-    // Функция копирования IP
     function copyIP() {
         const ipText = document.getElementById('ip').innerText;
         navigator.clipboard.writeText(ipText);
-        alert("IP скопирован! Вставляй в Minecraft.");
+        alert("IP СКОПИРОВАН. УДАЧИ В АДУ.");
     }
 
-    // Функция получения онлайна
     async function updateStatus() {
-        const ip = "window-trespass.gl.joinmc.link";
         try {
-            const response = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}`);
+            const response = await fetch(`https://api.mcstatus.io/v2/status/java/window-trespass.gl.joinmc.link`);
             const data = await response.json();
-            
-            if (data.online) {
-                document.getElementById('server-status').innerText = "ОНЛАЙН";
-                document.getElementById('server-status').style.color = "#55ff55";
-                document.getElementById('player-count').innerText = data.players.online;
-            } else {
-                document.getElementById('server-status').innerText = "ВЫКЛЮЧЕН";
-                document.getElementById('server-status').style.color = "#ff5555";
-                document.getElementById('player-count').innerText = "0";
-            }
-        } catch (error) {
-            console.log("Ошибка получения данных");
-        }
+            document.getElementById('player-count').innerText = data.online ? data.players.online : "OFFLINE";
+        } catch (e) { document.getElementById('player-count').innerText = "ERROR"; }
     }
-
-    // Обновляем статус каждые 30 секунд
     updateStatus();
     setInterval(updateStatus, 30000);
 </script>
